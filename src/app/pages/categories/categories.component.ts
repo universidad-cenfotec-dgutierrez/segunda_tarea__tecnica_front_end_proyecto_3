@@ -25,7 +25,7 @@ import {ModalComponent} from "../../components/modal/modal.component";
 export class CategoriesComponent implements OnInit {
     public categoryService = inject(CategoryService);
 
-   public  fb = inject(FormBuilder);
+    public fb = inject(FormBuilder);
 
     public categoryForm = this.fb.group({
         id: [''],

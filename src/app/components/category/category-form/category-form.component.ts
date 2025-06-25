@@ -18,12 +18,6 @@ export class CategoryFormComponent {
     @Output() callUpdateMethod: EventEmitter<ICategory> = new EventEmitter<ICategory>();
 
     callSave() {
-
-       /* if (this.form.invalid) {
-            this.form.markAllAsTouched();
-            return;
-        }*/
-
         let item: ICategory = {
             name: this.form.controls['name'].value,
             description: this.form.controls['description'].value

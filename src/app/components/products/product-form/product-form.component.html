@@ -1,1 +1,62 @@
-<p>product-form works!</p>
+<form [formGroup]="form" class="row mb-4">
+    <div>
+        <h2 class="mb-4">Add Product</h2>
+    </div>
+
+    <div class="mb-3 col-6">
+        <label for="name">Name*</label>
+        <input id="name" type="text" class="form-control" formControlName="name"/>
+        @if (invalid('name')) {
+            <p class="text-danger my-1">Name is required</p>
+        }
+    </div>
+
+    <div class="mb-3 col-6">
+        <label for="description">Description*</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
+        @if (invalid('description')) {
+            <p class="text-danger my-1">Description is required</p>
+        }
+    </div>
+
+    <div class="mb-3 col-4">
+        <label for="price">Price*</label>
+        <input id="price" type="number" class="form-control" formControlName="price"/>
+        @if (invalid('price')) {
+            <p class="text-danger my-1">Price must be ≥ 0.01</p>
+        }
+    </div>
+
+    <div class="mb-3 col-4">
+        <label for="stock">Stock*</label>
+        <input id="stock" type="number" class="form-control" formControlName="stock"/>
+        @if (invalid('stock')) {
+            <p class="text-danger my-1">Stock must be ≥ 1</p>
+        }
+    </div>
+
+    <div class="mb-3 col-4" formGroupName="category">
+        <label for="category">Category*</label>
+        <select id="category" class="form-select" formControlName="id">
+
+            @if (form.get('category.id')?.value < 1) {
+                <option [ngValue]="-1">-- Select category --</option>
+            }
+
+            @for (cat of categoriesList; track cat.id) {
+                <option [ngValue]="cat.id">{{ cat.name }}</option>
+            } @empty {
+                <option disabled>No categories</option>
+            }
+        </select>
+
+        @if (form.get('category.id')?.invalid &&
+        (form.get('category.id')?.touched || form.get('category.id')?.dirty)) {
+            <p class="text-danger my-1">Please select a valid category</p>
+        }
+    </div>
+
+    <div class="col-12">
+        <button (click)="callSave()" [disabled]="form.invalid" class="btn btn-primary">Save</button>
+    </div>
+</form>

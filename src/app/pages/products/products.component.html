@@ -1,1 +1,32 @@
-<p>products works!</p>
+@if (areActionsAvailable) {
+    <app-product-form
+            [form]="productForm"
+            [categoriesList]="categoryService.categories$()"
+            (callUpdateMethod)="updateProduct($event)"
+            (callSaveMethod)="saveProduct($event)"
+    />
+}
+
+<app-product-list
+        [pProductList]="productService.products$()"
+        (callUpdateModalMethod)="openEditProductModal($event)"
+        (callDeleteMethod)="deleteProduct($event)"
+/>
+
+<app-pagination
+        [service]="categoryService"
+/>
+
+<ng-template #editProductModal>
+    <app-modal
+            [hideFooter]="true"
+    >
+        <div>
+            <app-product-form
+                    [form]="productForm"
+                    [categoriesList]="categoryService.categories$()"
+                    (callUpdateMethod)="updateProduct($event)"
+            />
+        </div>
+    </app-modal>
+</ng-template>

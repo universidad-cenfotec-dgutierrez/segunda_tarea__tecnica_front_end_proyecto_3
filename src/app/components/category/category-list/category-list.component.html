@@ -4,8 +4,12 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        @if (areActionsAvailable) {
+            <th scope="col">Edit</th>
+        }
+        @if (areActionsAvailable) {
+            <th scope="col">Delete</th>
+        }
     </tr>
     </thead>
     <tbody>
@@ -14,20 +18,22 @@
                 <th scope="row">{{ category.id }}</th>
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
-                <td>
-                    @if (areActionsAvailable) {
+
+                @if (areActionsAvailable) {
+                    <td>
                         <button (click)="callUpdateModalMethod.emit(category)"
-                                 class="btn btn-success">Edit
+                                class="btn btn-success">Edit
                         </button>
-                    }
-                </td>
-                <td>
-                    @if (areActionsAvailable) {
+                    </td>
+                }
+
+                @if (areActionsAvailable) {
+                    <td>
                         <button (click)="callDeleteMethod.emit(category)"
                                 class="btn btn-danger">Delete
                         </button>
-                    }
-                </td>
+                    </td>
+                }
             </tr>
         }
         @if (!pCategoryList || pCategoryList.length === 0) {

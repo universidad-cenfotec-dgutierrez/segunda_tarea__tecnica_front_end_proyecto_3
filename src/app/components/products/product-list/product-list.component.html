@@ -1,1 +1,50 @@
-<p>product-list works!</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Categoría</th>
+        @if (areActionsAvailable) {
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+        @for (product of pProductList; track product.id) {
+            <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.category?.name || 'Sin categoría' }}</td>
+
+                @if (areActionsAvailable) {
+                    <td>
+                        <button (click)="callUpdateModalMethod.emit(product)" class="btn btn-success">
+                            Editar
+                        </button>
+                    </td>
+                }
+
+                @if (areActionsAvailable) {
+                    <td>
+                        <button (click)="callDeleteMethod.emit(product)" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </td>
+                }
+            </tr>
+        }
+
+        @if (!pProductList || pProductList.length === 0) {
+            <tr>
+                <td colspan="8" class="text-center">No products available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
