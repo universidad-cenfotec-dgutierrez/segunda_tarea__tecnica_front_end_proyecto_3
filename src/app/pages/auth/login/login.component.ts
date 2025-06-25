@@ -17,8 +17,8 @@ export class LoginComponent {
   @ViewChild('password') passwordModel!: NgModel;
 
   public loginForm: { email: string; password: string } = {
-    email: 'super.admin@gmail.com',
-    password: 'superadmin123',
+    email: '',
+    password: '',
   };
 
   constructor(
