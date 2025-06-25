@@ -1,0 +1,32 @@
+@if (areActionsAvailable) {
+    <app-category-form
+            [form]="categoryForm"
+            (callSaveMethod)="saveCategory($event)"
+            (callUpdateMethod)="updateCategory($event)"
+    />
+}
+
+<app-category-list
+        [pCategoryList]="categoryService.categories$()"
+        (callUpdateModalMethod)="openEditCategoryModal($event)"
+        (callDeleteMethod)="deleteCategory($event)"
+/>
+
+<app-pagination
+        [service]="categoryService"
+/>
+
+
+<ng-template #editCategoryModal>
+    <app-modal
+            [hideFooter]="true"
+    >
+        <div>
+            <app-category-form
+            [form]="categoryForm"
+            (callUpdateMethod)="updateCategory($event)"
+            />
+        </div>
+    </app-modal>
+</ng-template>
+

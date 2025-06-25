@@ -38,5 +38,4 @@ export class SportTeamFormComponent {
       this.callSaveMethod.emit(item);
     }
   }
-
 }

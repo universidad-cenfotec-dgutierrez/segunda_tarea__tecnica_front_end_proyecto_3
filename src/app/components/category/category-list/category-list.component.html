@@ -1,0 +1,39 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (category of pCategoryList; track category) {
+            <tr>
+                <th scope="row">{{ category.id }}</th>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    @if (areActionsAvailable) {
+                        <button (click)="callUpdateModalMethod.emit(category)"
+                                 class="btn btn-success">Edit
+                        </button>
+                    }
+                </td>
+                <td>
+                    @if (areActionsAvailable) {
+                        <button (click)="callDeleteMethod.emit(category)"
+                                class="btn btn-danger">Delete
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+        @if (!pCategoryList || pCategoryList.length === 0) {
+            <tr>
+                <td colspan="5">No categories available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

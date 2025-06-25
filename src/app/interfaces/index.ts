@@ -104,3 +104,9 @@ export interface IPlayer {
   id?: number;
   name?: string;
 }
+
+export interface ICategory {
+  id?: number;
+  name?: string;
+  description?: string;
+}
